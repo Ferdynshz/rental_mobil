@@ -2,7 +2,32 @@
 
 // Data penyewa sementara (in-memory)
 // Di aplikasi nyata, ini bisa diganti dengan database (misalnya MySQL, MongoDB, dll)
-let penyewaList = [];
+let penyewaList = [
+  {
+    "id": 1,
+    "nama": "Budi",
+    "alamat": "Jakarta",
+    "nomor_telepon": "081234567890"
+  },
+  {
+    "id": 3,
+    "nama": "wannn",
+    "alamat": "jakarta",
+    "nomor_telepon": "2324234"
+  },
+  {
+    "id": 4,
+    "nama": "ferdy",
+    "alamat": "jakarta",
+    "nomor_telepon": "37473349"
+  },
+  {
+    "id": 5,
+    "nama": "Ijat",
+    "alamat": "Jakarta",
+    "nomor_telepon": "0248303443"
+  }
+];
 
 // Fungsi untuk mendapatkan semua penyewa
 function getAllPenyewas() {
