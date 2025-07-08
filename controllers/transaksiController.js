@@ -34,7 +34,9 @@ exports.create = (req, res) => {
     mobilId: parseInt(req.body.mobilId),
     penyewaId: parseInt(req.body.penyewaId),
     tanggalSewa: req.body.tanggalSewa,
-    tanggalKembali: req.body.tanggalKembali
+    tanggalKembali: req.body.tanggalKembali,
+    lamaSewa: req.body.lamaSewa,
+    totalBiaya: req.body.totalBiaya
   };
   transaksi.push(newTransaksi);
   res.redirect('/transaksi');
