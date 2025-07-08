@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": 1,
+    "merk": "alphard",
+    "spesifikasi": "vlie",
+    "tahun": 111,
+    "nomor_polisi": "1",
+    "harga_sewa": 1
+  },
+  {
+    "id": 23,
+    "merk": "toyota",
+    "spesifikasi": "toyota rush warna putih",
+    "tahun": 2023,
+    "nomor_polisi": "AG 2378 SDK",
+    "harga_sewa": 120000
+  }
+]

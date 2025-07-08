@@ -39,7 +39,9 @@ exports.create = async (req, res) => {
     mobilId: parseInt(req.body.mobilId),
     penyewaId: parseInt(req.body.penyewaId),
     tanggalSewa: req.body.tanggalSewa,
-    tanggalKembali: req.body.tanggalKembali
+    tanggalKembali: req.body.tanggalKembali,
+    lamaSewa: req.body.lamaSewa,
+    totalBiaya: req.body.totalBiaya
   };
   transaksis.push(newTransaksi);
   await fs.writeJSON(transaksiPath, transaksis, { spaces: 2 });
