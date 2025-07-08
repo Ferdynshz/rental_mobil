@@ -1,41 +1,47 @@
-let transaksi = [];
+const fs = require('fs-extra');
+const path = require('path');
 
-const mobils = [
-  { id: 1, merk: 'Toyota' },
-  { id: 2, merk: 'Honda' }
-];
+const transaksiPath = path.join(__dirname, '../data/transaksis.json');
+const penyewaPath = path.join(__dirname, '../data/penyewas.json');
+const mobilPath = path.join(__dirname, '../data/mobils.json');
 
-const penyewas = [
-  { id: 1, nama: 'Budi' },
-  { id: 2, nama: 'Siti' }
-];
+// Menampilkan daftar transaksi
+exports.index = async (req, res) => {
+  const transaksis = await fs.readJSON(transaksiPath);
+  const mobils = await fs.readJSON(mobilPath);
+  const penyewas = await fs.readJSON(penyewaPath);
 
-exports.index = (req, res) => {
-  const hasil = transaksi.map(t => {
+  const hasil = transaksis.map(t => {
     const mobil = mobils.find(m => m.id === t.mobilId);
     const penyewa = penyewas.find(p => p.id === t.penyewaId);
     return {
       ...t,
-      mobilMerk: mobil?.merk,
-      penyewaNama: penyewa?.nama
+      mobilMerk: mobil?.merk || 'Tidak ditemukan',
+      penyewaNama: penyewa?.nama || 'Tidak ditemukan'
     };
   });
 
   res.render('transaksi/index', { transaksi: hasil });
 };
 
-exports.createForm = (req, res) => {
+// Form tambah transaksi
+exports.createForm = async (req, res) => {
+  const mobils = await fs.readJSON(mobilPath);
+  const penyewas = await fs.readJSON(penyewaPath);
   res.render('transaksi/create', { mobils, penyewas });
 };
 
-exports.create = (req, res) => {
+// Simpan transaksi baru
+exports.create = async (req, res) => {
+  const transaksis = await fs.readJSON(transaksiPath);
   const newTransaksi = {
-    id: transaksi.length + 1,
+    id: transaksis.length > 0 ? transaksis[transaksis.length - 1].id + 1 : 1,
     mobilId: parseInt(req.body.mobilId),
     penyewaId: parseInt(req.body.penyewaId),
     tanggalSewa: req.body.tanggalSewa,
     tanggalKembali: req.body.tanggalKembali
   };
-  transaksi.push(newTransaksi);
+  transaksis.push(newTransaksi);
+  await fs.writeJSON(transaksiPath, transaksis, { spaces: 2 });
   res.redirect('/transaksi');
 };
