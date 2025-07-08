@@ -6,5 +6,13 @@
     "tahun": 2021,
     "nomor_polisi": "AG 2378 SDK",
     "harga_sewa": 1200000
+  },
+  {
+    "id": 4,
+    "merk": "alphard",
+    "spesifikasi": "biru",
+    "tahun": 353,
+    "nomor_polisi": "B 362F JE",
+    "harga_sewa": 345678
   }
 ]

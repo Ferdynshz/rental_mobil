@@ -1,6 +1,6 @@
 const transaksiModel = require('../models/transaksiModel');
 const penyewaModel = require('../models/penyewaModel');
-const mobilModel = require('../models/mobilModel'); // Asumsikan kamu punya ini
+const mobilModel = require('../models/mobilModel'); 
 
 exports.index = (req, res) => {
   const mobils = mobilModel.getAllMobils();       // Ambil semua mobil
