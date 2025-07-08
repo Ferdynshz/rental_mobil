@@ -24,12 +24,7 @@
               <form method="post" action="/transaksi/create">
                 <div class="mb-3">
                   <label class="form-label fw-semibold">Mobil</label>
-                  <input
-                      type="text"
-                      name="mobilId"
-                      class="form-control"
-                      required
-                    />
+                  <select name="mobilId" class="form-select" required>
                     <% mobils.forEach(m => { %>
                     <option value="<%= m.id %>"><%= m.merk %></option>
                     <% }) %>

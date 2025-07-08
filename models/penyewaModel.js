@@ -5,7 +5,7 @@
 let penyewaList = [];
 
 // Fungsi untuk mendapatkan semua penyewa
-function getAllPenyewa() {
+function getAllPenyewas() {
   return penyewaList;
 }
 
@@ -21,7 +21,7 @@ function findPenyewaByName(name) {
 
 // Ekspor fungsi-fungsi agar bisa digunakan di controller
 module.exports = {
-  getAllPenyewa,
+  getAllPenyewas,
   addPenyewa,
   findPenyewaByName
 };
