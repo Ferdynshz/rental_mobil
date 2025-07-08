@@ -1,104 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rental Mobil</title>
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: url("/images/bg-mobil.jpg") no-repeat center center fixed;
-      background-size: cover;
-      background-color: #333;
-    }
-
-   .glass-card {
-  background: rgba(255, 255, 255, 0.4); /* Lebih transparan */
-  border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-  color: #000;
-  backdrop-filter: blur(6px); /* Efek blur untuk glassmorphism */
-  -webkit-backdrop-filter: blur(6px); /* Untuk Safari */
-}
-
-
-    .navbar {
-      background-color: rgba(0, 0, 0, 0.85);
-    }
-
-    h1, p {
-      color: #000;
-    }
-
-    .btn i {
-      margin-right: 8px;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="/">Rental Mobil</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="/mobil"><i class="bi bi-car-front"></i>Mobil</a></li>
-          <li class="nav-item"><a class="nav-link" href="/penyewa"><i class="bi bi-person-lines-fill"></i>Penyewa</a></li>
-          <li class="nav-item"><a class="nav-link" href="/transaksi"><i class="bi bi-journal-text"></i>Transaksi</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Main Content -->
-  <div class="container py-5" style="margin-top: 80px;">
-    <div class="text-center mb-5 glass-card">
-      <h1 class="display-4 fw-bold">Aplikasi Rental Mobil</h1>
-      <p class="lead">Kelola data mobil, penyewa, dan transaksi dengan mudah dan cepat</p>
-    </div>
-
-    <div class="row justify-content-center">
-      <div class="col-md-4 mb-4">
-        <div class="glass-card text-center">
-          <h5 class="card-title"><i class="bi bi-car-front-fill fs-3 text-primary"></i><br>Mobil</h5>
-          <p class="card-text">Lihat dan kelola data mobil yang tersedia.</p>
-          <a href="/mobil" class="btn btn-primary w-100">
-            <i class="bi bi-car-front-fill"></i> Kelola Mobil
-          </a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rental Mobil</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: url("/images/bg-mobil.jpg") no-repeat center center fixed;
+        background-size: cover;
+        background-color: #333;
+        color: white;
+      }
+      h1,
+      p {
+        color: white;
+      }
+      .card {
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+      }
+      .navbar {
+        background-color: rgba(0, 0, 0, 0.9);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+      <div class="container">
+        <a class="navbar-brand" href="/">Rental Mobil</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/mobil">Mobil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/penyewa">Penyewa</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/transaksi">Transaksi</a>
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="col-md-4 mb-4">
-        <div class="glass-card text-center">
-          <h5 class="card-title"><i class="bi bi-people-fill fs-3 text-success"></i><br>Penyewa</h5>
-          <p class="card-text">Lihat dan kelola data penyewa aktif.</p>
-          <a href="/penyewa" class="btn btn-success w-100">
-            <i class="bi bi-person-lines-fill"></i> Kelola Penyewa
-          </a>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="glass-card text-center">
-          <h5 class="card-title"><i class="bi bi-journal-bookmark-fill fs-3 text-warning"></i><br>Transaksi</h5>
-          <p class="card-text">Lihat dan kelola transaksi penyewaan mobil.</p>
-          <a href="/transaksi" class="btn btn-warning text-white w-100">
-            <i class="bi bi-journal-text"></i> Kelola Transaksi
-          </a>
+    </nav>
+
+    <div class="overlay">
+      <div class="mx-auto bg-dark bg-opacity-75 p-5 rounded-4 shadow-lg text-center mb-3" style="max-width: 600px;">
+  <h1 class="display-6 fw-bold text-primary">Aplikasi Rental Mobil</h1>
+  <p class="fs-6 text-light">Kelola data mobil, penyewa, dan transaksi dengan mudah.</p>
+</div>
+
+
+        <div class="row justify-content-center">
+          <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+              <div class="card-body text-center">
+                <h5 class="card-title">Mobil</h5>
+                <p class="card-text">Lihat dan kelola data mobil</p>
+                <a href="/mobil" class="btn btn-primary w-100">Kelola Mobil</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+              <div class="card-body text-center">
+                <h5 class="card-title">Penyewa</h5>
+                <p class="card-text">Lihat dan kelola data penyewa</p>
+                <a href="/penyewa" class="btn btn-success w-100"
+                  >Kelola Penyewa</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+              <div class="card-body text-center">
+                <h5 class="card-title">Transaksi</h5>
+                <p class="card-text">Lihat dan kelola transaksi sewa</p>
+                <a href="/transaksi" class="btn btn-warning w-100"
+                  >Kelola Transaksi</a
+                >
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
