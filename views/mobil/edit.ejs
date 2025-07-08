@@ -1,0 +1,8 @@
+<h1>Edit Mobil</h1>
+<form method="post" action="/mobil/<%= mobil.id %>/edit">
+  <label>Merk:</label>
+  <input type="text" name="merk" value="<%= mobil.merk %>" />
+  <label>Tahun:</label>
+  <input type="number" name="tahun" value="<%= mobil.tahun %>" />
+  <button type="submit">Update</button>
+</form>
