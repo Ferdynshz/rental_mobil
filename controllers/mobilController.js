@@ -1,28 +1,14 @@
-const fs = require('fs-extra');
-const path = require('path');
+const mobilModel = require('../models/mobilModel');
 
-const dataFile = path.join(__dirname, '../data/mobils.json');
-
-// Fungsi bantu untuk load data
-async function loadMobils() {
-  return await fs.readJSON(dataFile);
-}
-
-// Fungsi bantu untuk simpan data
-async function saveMobils(mobils) {
-  await fs.writeJSON(dataFile, mobils, { spaces: 2 });
-}
-
-// Tampilkan daftar mobil
+// Tampilkan semua mobil
 exports.index = async (req, res) => {
-  const mobils = await loadMobils();
+  const mobils = await mobilModel.getAllMobils();
   res.render('mobil/index', { mobils });
 };
 
-// Tampilkan detail mobil
+// Tampilkan detail mobil berdasarkan ID
 exports.show = async (req, res) => {
-  const mobils = await loadMobils();
-  const mobil = mobils.find(m => m.id === parseInt(req.params.id));
+  const mobil = await mobilModel.findMobilById(parseInt(req.params.id));
   if (!mobil) return res.status(404).send('Mobil tidak ditemukan');
   res.render('mobil/show', { mobil });
 };
@@ -34,19 +20,14 @@ exports.createForm = (req, res) => {
 
 // Simpan mobil baru
 exports.create = async (req, res) => {
-  const mobils = await loadMobils();
-  const {
-    id, merk, spesifikasi, tahun, nomor_polisi, harga_sewa
-  } = req.body;
+  const { id, merk, spesifikasi, tahun, nomor_polisi, harga_sewa } = req.body;
 
   if (!id || !merk || !spesifikasi || !tahun || !nomor_polisi || !harga_sewa) {
     return res.status(400).send('Semua data wajib diisi');
   }
 
-  const existing = mobils.find(m => m.id === parseInt(id));
-  if (existing) {
-    return res.status(400).send('ID mobil sudah digunakan');
-  }
+  const existing = await mobilModel.findMobilById(parseInt(id));
+  if (existing) return res.status(400).send('ID sudah digunakan');
 
   const newMobil = {
     id: parseInt(id),
@@ -57,39 +38,39 @@ exports.create = async (req, res) => {
     harga_sewa: parseInt(harga_sewa)
   };
 
-  mobils.push(newMobil);
-  await saveMobils(mobils);
+  await mobilModel.addMobil(newMobil);
   res.redirect('/mobil');
 };
 
 // Form edit mobil
 exports.editForm = async (req, res) => {
-  const mobils = await loadMobils();
-  const mobil = mobils.find(m => m.id === parseInt(req.params.id));
+  const mobil = await mobilModel.findMobilById(parseInt(req.params.id));
   if (!mobil) return res.status(404).send('Mobil tidak ditemukan');
   res.render('mobil/edit', { mobil });
 };
 
 // Update mobil
 exports.update = async (req, res) => {
-  const mobils = await loadMobils();
-  const mobil = mobils.find(m => m.id === parseInt(req.params.id));
-  if (!mobil) return res.status(404).send('Mobil tidak ditemukan');
+  const id = parseInt(req.params.id);
+  const newData = {
+    merk: req.body.merk?.trim(),
+    spesifikasi: req.body.spesifikasi?.trim(),
+    tahun: parseInt(req.body.tahun),
+    nomor_polisi: req.body.nomor_polisi?.trim(),
+    harga_sewa: parseInt(req.body.harga_sewa)
+  };
 
-  mobil.merk = req.body.merk?.trim() || mobil.merk;
-  mobil.spesifikasi = req.body.spesifikasi?.trim() || mobil.spesifikasi;
-  mobil.tahun = parseInt(req.body.tahun) || mobil.tahun;
-  mobil.nomor_polisi = req.body.nomor_polisi?.trim() || mobil.nomor_polisi;
-  mobil.harga_sewa = parseInt(req.body.harga_sewa) || mobil.harga_sewa;
+  const updated = await mobilModel.updateMobil(id, newData);
+  if (!updated) return res.status(404).send('Mobil tidak ditemukan');
 
-  await saveMobils(mobils);
   res.redirect('/mobil');
 };
 
 // Hapus mobil
 exports.delete = async (req, res) => {
-  let mobils = await loadMobils();
-  mobils = mobils.filter(m => m.id !== parseInt(req.params.id));
-  await saveMobils(mobils);
+  const id = parseInt(req.params.id);
+  const deleted = await mobilModel.deleteMobil(id);
+  if (!deleted) return res.status(404).send('Mobil tidak ditemukan');
+
   res.redirect('/mobil');
 };

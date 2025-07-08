@@ -1,52 +1,36 @@
-// models/penyewaModel.js
+const fs = require('fs-extra');
+const path = require('path');
 
-// Data penyewa sementara (in-memory)
-// Di aplikasi nyata, ini bisa diganti dengan database (misalnya MySQL, MongoDB, dll)
-let penyewaList = [
-  {
-    "id": 1,
-    "nama": "Budi",
-    "alamat": "Jakarta",
-    "nomor_telepon": "081234567890"
-  },
-  {
-    "id": 3,
-    "nama": "wannn",
-    "alamat": "jakarta",
-    "nomor_telepon": "2324234"
-  },
-  {
-    "id": 4,
-    "nama": "ferdy",
-    "alamat": "jakarta",
-    "nomor_telepon": "37473349"
-  },
-  {
-    "id": 5,
-    "nama": "Ijat",
-    "alamat": "Jakarta",
-    "nomor_telepon": "0248303443"
-  }
-];
+const dataFile = path.join(__dirname, '../data/penyewas.json');
 
-// Fungsi untuk mendapatkan semua penyewa
-function getAllPenyewas() {
-  return penyewaList;
+// Ambil semua penyewa
+async function getAllPenyewas() {
+  const data = await fs.readJSON(dataFile);
+  return Array.isArray(data) ? data : [];
 }
 
-// Fungsi untuk menambahkan penyewa baru
-function addPenyewa(data) {
-  penyewaList.push(data);
+// Tambah penyewa baru
+async function addPenyewa(data) {
+  const penyewas = await getAllPenyewas();
+  penyewas.push(data);
+  await fs.writeJSON(dataFile, penyewas, { spaces: 2 });
 }
 
-// Fungsi untuk mencari penyewa berdasarkan nama (optional)
-function findPenyewaByName(name) {
-  return penyewaList.find(p => p.nama.toLowerCase() === name.toLowerCase());
+// Cari penyewa berdasarkan nama
+async function findPenyewaByName(name) {
+  const penyewas = await getAllPenyewas();
+  return penyewas.find(p => p.nama.toLowerCase() === name.toLowerCase());
 }
 
-// Ekspor fungsi-fungsi agar bisa digunakan di controller
+// Cari penyewa berdasarkan ID (tambahan opsional)
+async function findPenyewaById(id) {
+  const penyewas = await getAllPenyewas();
+  return penyewas.find(p => p.id === id);
+}
+
 module.exports = {
   getAllPenyewas,
   addPenyewa,
-  findPenyewaByName
+  findPenyewaByName,
+  findPenyewaById
 };

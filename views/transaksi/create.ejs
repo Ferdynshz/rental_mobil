@@ -25,19 +25,25 @@
                 <div class="mb-3">
                   <label class="form-label fw-semibold">Mobil</label>
                   <select name="mobilId" class="form-select" required>
-                    <% mobils.forEach(m => { %>
-                    <option value="<%= m.id %>"><%= m.merk %></option>
-                    <% }) %>
+                     <% if (Array.isArray(mobils)) { %>
+                      <% mobils.forEach(m => { %>
+                        <option value="<%= m.id %>"><%= m.merk %></option>
+                      <% }) %>
+                    <% } else { %>
+                      <option disabled>Data mobil tidak tersedia</option>
+                    <% } %>
                   </select>
-                </div>
-
-                <div class="mb-3">
                   <label class="form-label fw-semibold">Penyewa</label>
                   <select name="penyewaId" class="form-select" required>
-                    <% penyewas.forEach(p => { %>
-                    <option value="<%= p.id %>"><%= p.nama %></option>
-                    <% }) %>
+                    <% if (Array.isArray(penyewas)) { %>
+                      <% penyewas.forEach(p => { %>
+                        <option value="<%= p.id %>"><%= p.nama %></option>
+                      <% }) %>
+                    <% } else { %>
+                      <option disabled>Data penyewa tidak tersedia</option>
+                    <% } %>
                   </select>
+
                 </div>
 
                 <div class="row">

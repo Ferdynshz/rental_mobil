@@ -9,11 +9,13 @@ exports.index = (req, res) => {
   res.render('transaksi/index', { transaksi });
 };
 
-exports.createForm = (req, res) => {
-  const mobils = mobilModel.getAllMobils();
-  const penyewas = penyewaModel.getAllPenyewas();
-  res.render('transaksi/create', { mobils, penyewas });
+
+exports.createForm = async (req, res) => {
+  const penyewas = await penyewaModel.getAllPenyewas();
+  const mobils = await mobilModel.getAllMobils();
+  res.render('transaksi/create', { penyewas, mobils });
 };
+
 
 exports.create = (req, res) => {
   const data = {

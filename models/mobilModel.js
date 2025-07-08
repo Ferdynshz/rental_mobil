@@ -1,59 +1,42 @@
-// Data mobil sementara (disimpan di memori sementara)
-let mobilList = [
-  {
-    "id": 2,
-    "merk": "toyota",
-    "spesifikasi": "toyota rush warna putih",
-    "tahun": 2021,
-    "nomor_polisi": "AG 2378 SDK",
-    "harga_sewa": 1200000
-  },
-  {
-    "id": 4,
-    "merk": "alphard",
-    "spesifikasi": "biru",
-    "tahun": 353,
-    "nomor_polisi": "B 362F JE",
-    "harga_sewa": 345678
-  }
-];
+const fs = require('fs-extra');
+const path = require('path');
+const dataFile = path.join(__dirname, '../data/mobils.json');
 
-// Ambil semua mobil
-function getAllMobils() {
-  return mobilList;
+async function getAllMobils() {
+  const data = await fs.readJSON(dataFile);
+  return Array.isArray(data) ? data : []; // pastikan bentuknya array
 }
 
-// Tambah mobil baru
-function addMobil(data) {
-  mobilList.push(data);
+async function addMobil(data) {
+  const mobils = await getAllMobils();
+  mobils.push(data);
+  await fs.writeJSON(dataFile, mobils, { spaces: 2 });
 }
 
-// Cari mobil berdasarkan ID
-function findMobilById(id) {
-  return mobilList.find(m => m.id === id);
+async function findMobilById(id) {
+  const mobils = await getAllMobils();
+  return mobils.find(m => m.id === id);
 }
 
-// Update data mobil
-function updateMobil(id, newData) {
-  const index = mobilList.findIndex(m => m.id === id);
+async function updateMobil(id, newData) {
+  const mobils = await getAllMobils();
+  const index = mobils.findIndex(m => m.id === id);
   if (index !== -1) {
-    mobilList[index] = { ...mobilList[index], ...newData };
+    mobils[index] = { ...mobils[index], ...newData };
+    await fs.writeJSON(dataFile, mobils, { spaces: 2 });
     return true;
   }
   return false;
 }
 
-// Hapus mobil berdasarkan ID
-function deleteMobil(id) {
-  const index = mobilList.findIndex(m => m.id === id);
-  if (index !== -1) {
-    mobilList.splice(index, 1);
-    return true;
-  }
-  return false;
+async function deleteMobil(id) {
+  const mobils = await getAllMobils();
+  const filtered = mobils.filter(m => m.id !== id);
+  if (filtered.length === mobils.length) return false;
+  await fs.writeJSON(dataFile, filtered, { spaces: 2 });
+  return true;
 }
 
-// Ekspor semua fungsi
 module.exports = {
   getAllMobils,
   addMobil,

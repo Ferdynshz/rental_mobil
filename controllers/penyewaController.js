@@ -1,80 +1,79 @@
-const fs = require('fs-extra');
-const path = require('path');
-
-const dataFile = path.join(__dirname, '../data/penyewas.json');
-
-// Fungsi bantu untuk load data
-async function loadPenyewas() {
-  return await fs.readJSON(dataFile);
-}
-
-// Fungsi bantu untuk simpan data
-async function savePenyewas(penyewas) {
-  await fs.writeJSON(dataFile, penyewas, { spaces: 2 });
-}
+const penyewaModel = require('../models/penyewaModel');
 
 // Tampilkan daftar penyewa
 exports.index = async (req, res) => {
-  const penyewas = await loadPenyewas();
+  const penyewas = await penyewaModel.getAllPenyewas();
   res.render('penyewa/index', { penyewas });
 };
 
-// Tampilkan detail
+// Tampilkan detail penyewa
 exports.show = async (req, res) => {
-  const penyewas = await loadPenyewas();
-  const penyewa = penyewas.find(p => p.id === parseInt(req.params.id));
+  const penyewa = await penyewaModel.findPenyewaById(parseInt(req.params.id));
   if (!penyewa) return res.status(404).send('Penyewa tidak ditemukan');
   res.render('penyewa/show', { penyewa });
 };
 
-// Form create
+// Form untuk tambah penyewa
 exports.createForm = (req, res) => {
   res.render('penyewa/create');
 };
 
-// Simpan baru
+// Simpan penyewa baru
 exports.create = async (req, res) => {
-  const penyewas = await loadPenyewas();
   const { nama, alamat, nomor_telepon } = req.body;
-  if (!nama || !alamat || !nomor_telepon) return res.status(400).send('Semua data wajib diisi');
+  if (!nama || !alamat || !nomor_telepon) {
+    return res.status(400).send('Semua data wajib diisi');
+  }
 
+  const penyewas = await penyewaModel.getAllPenyewas();
   const newPenyewa = {
     id: penyewas.length > 0 ? penyewas[penyewas.length - 1].id + 1 : 1,
     nama: nama.trim(),
     alamat: alamat.trim(),
     nomor_telepon: nomor_telepon.trim()
   };
-  penyewas.push(newPenyewa);
-  await savePenyewas(penyewas);
+
+  await penyewaModel.addPenyewa(newPenyewa);
   res.redirect('/penyewa');
 };
 
-// Form edit
+// Form untuk edit penyewa
 exports.editForm = async (req, res) => {
-  const penyewas = await loadPenyewas();
-  const penyewa = penyewas.find(p => p.id === parseInt(req.params.id));
+  const penyewa = await penyewaModel.findPenyewaById(parseInt(req.params.id));
   if (!penyewa) return res.status(404).send('Penyewa tidak ditemukan');
   res.render('penyewa/edit', { penyewa });
 };
 
-// Update
+// Proses update data penyewa
 exports.update = async (req, res) => {
-  const penyewas = await loadPenyewas();
-  const penyewa = penyewas.find(p => p.id === parseInt(req.params.id));
-  if (!penyewa) return res.status(404).send('Penyewa tidak ditemukan');
+  const penyewas = await penyewaModel.getAllPenyewas();
+  const index = penyewas.findIndex(p => p.id === parseInt(req.params.id));
+  if (index === -1) return res.status(404).send('Penyewa tidak ditemukan');
 
-  penyewa.nama = req.body.nama?.trim() || penyewa.nama;
-  penyewa.alamat = req.body.alamat?.trim() || penyewa.alamat;
-  penyewa.nomor_telepon = req.body.nomor_telepon?.trim() || penyewa.nomor_telepon;
+  penyewas[index] = {
+    ...penyewas[index],
+    nama: req.body.nama?.trim() || penyewas[index].nama,
+    alamat: req.body.alamat?.trim() || penyewas[index].alamat,
+    nomor_telepon: req.body.nomor_telepon?.trim() || penyewas[index].nomor_telepon,
+  };
 
-  await savePenyewas(penyewas);
+  const fs = require('fs-extra');
+  const path = require('path');
+  const dataFile = path.join(__dirname, '../data/penyewas.json');
+  await fs.writeJSON(dataFile, penyewas, { spaces: 2 });
+
   res.redirect('/penyewa');
 };
 
-// Hapus
+// Hapus penyewa
 exports.delete = async (req, res) => {
-  let penyewas = await loadPenyewas();
-  penyewas = penyewas.filter(p => p.id !== parseInt(req.params.id));
-  await savePenyewas(penyewas);
+  const penyewas = await penyewaModel.getAllPenyewas();
+  const filtered = penyewas.filter(p => p.id !== parseInt(req.params.id));
+
+  const fs = require('fs-extra');
+  const path = require('path');
+  const dataFile = path.join(__dirname, '../data/penyewas.json');
+  await fs.writeJSON(dataFile, filtered, { spaces: 2 });
+
   res.redirect('/penyewa');
 };
