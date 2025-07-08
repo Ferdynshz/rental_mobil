@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": 1,
+    "mobilId": 1,
+    "penyewaId": 3,
+    "tanggalSewa": "2025-07-08",
+    "tanggalKembali": "2025-07-10",
+    "lamaSewa": "2 hari",
+    "totalBiaya": "500.000"
+  }
+]
