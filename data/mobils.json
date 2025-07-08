@@ -14,5 +14,13 @@
     "tahun": 2023,
     "nomor_polisi": "AG 2378 SDK",
     "harga_sewa": 120000
+  },
+  {
+    "id": 12,
+    "merk": "Toyota",
+    "spesifikasi": "toyota rush warna merah",
+    "tahun": 2012,
+    "nomor_polisi": "B 1234 AB",
+    "harga_sewa": 230000
   }
 ]
