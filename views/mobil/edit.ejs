@@ -1,8 +1,31 @@
 <h1>Edit Mobil</h1>
-<form method="post" action="/mobil/<%= mobil.id %>/edit">
-  <label>Merk:</label>
-  <input type="text" name="merk" value="<%= mobil.merk %>" />
-  <label>Tahun:</label>
-  <input type="number" name="tahun" value="<%= mobil.tahun %>" />
-  <button type="submit">Update</button>
+<form method="post" action="/mobil/<%= mobil.id %>/edit" class="mb-3">
+
+  <div class="mb-3">
+    <label class="form-label">Merk:</label>
+    <input type="text" name="merk" value="<%= mobil.merk %>" class="form-control" required />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Spesifikasi:</label>
+    <input type="text" name="spesifikasi" value="<%= mobil.spesifikasi %>" class="form-control" required />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Tahun:</label>
+    <input type="number" name="tahun" value="<%= mobil.tahun %>" class="form-control" required />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Nomor Polisi:</label>
+    <input type="text" name="nomor_polisi" value="<%= mobil.nomor_polisi %>" class="form-control" required />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Harga Sewa (per hari):</label>
+    <input type="number" name="harga_sewa" value="<%= mobil.harga_sewa %>" class="form-control" required />
+  </div>
+
+  <button type="submit" class="btn btn-success">Update</button>
+  <a href="/mobil" class="btn btn-secondary">Batal</a>
 </form>

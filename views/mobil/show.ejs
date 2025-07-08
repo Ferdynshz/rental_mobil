@@ -1,4 +1,14 @@
-<h1>Detail Mobil</h1>
-<p>Merk: <%= mobil.merk %></p>
-<p>Tahun: <%= mobil.tahun %></p>
-<a href="/mobil">Kembali</a>
+<div class="container mt-4">
+  <h1 class="mb-4">Detail Mobil</h1>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><%= mobil.merk %></h5>
+      <p class="card-text"><strong>Spesifikasi:</strong> <%= mobil.spesifikasi %></p>
+      <p class="card-text"><strong>Tahun:</strong> <%= mobil.tahun %></p>
+      <p class="card-text"><strong>Nomor Polisi:</strong> <%= mobil.nomor_polisi %></p>
+      <p class="card-text"><strong>Harga Sewa per Hari:</strong> 
+        Rp <%= mobil.harga_sewa.toLocaleString('id-ID') %></p>
+      <a href="/mobil" class="btn btn-secondary mt-3">Kembali</a>
+    </div>
+  </div>
+</div>

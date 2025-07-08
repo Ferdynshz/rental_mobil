@@ -17,31 +17,38 @@
     <table class="table table-bordered table-striped">
       <thead class="table-dark">
         <tr>
-          <th>ID</th>
+          <th>ID Mobil</th>
           <th>Merk</th>
+          <th>spesifikasi</th>
           <th>Tahun</th>
+          <th>Nomor Polisi</th>
+          <th>Harga Sewa Per-Hari</th>
           <th>Aksi</th>
         </tr>
       </thead>
-      <tbody>
-        <% mobils.forEach(mobil => { %>
-          <tr>
-            <td><%= mobil.id %></td>
-            <td>
-              <a href="/mobil/<%= mobil.id %>" class="text-decoration-none">
-                <%= mobil.merk %>
-              </a>
-            </td>
-            <td><%= mobil.tahun %></td>
-            <td>
-              <a href="/mobil/<%= mobil.id %>/edit" class="btn btn-sm btn-warning">Edit</a>
-              <form action="/mobil/<%= mobil.id %>/delete" method="post" class="d-inline">
-                <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-              </form>
-            </td>
-          </tr>
-        <% }) %>
-      </tbody>
+<tbody>
+  <% mobils.forEach(mobil => { %>
+    <tr>
+      <td><%= mobil.id %></td>
+      <td>
+        <a href="/mobil/<%= mobil.id %>" class="text-decoration-none">
+          <%= mobil.merk %>
+        </a>
+      </td>
+      <td><%= mobil.spesifikasi %></td>
+      <td><%= mobil.tahun %></td>
+      <td><%= mobil.nomor_polisi %></td>
+      <td>Rp <%= mobil.harga_sewa_per_hari %></td>
+      <td>
+        <a href="/mobil/<%= mobil.id %>/edit" class="btn btn-sm btn-warning">Edit</a>
+        <form action="/mobil/<%= mobil.id %>/delete" method="post" class="d-inline">
+          <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+        </form>
+      </td>
+    </tr>
+  <% }) %>
+</tbody>
+
     </table>
 
     <a href="/" class="btn btn-secondary">Kembali ke Beranda</a>
