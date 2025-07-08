@@ -1,26 +1,10 @@
 [
   {
-    "id": 1,
-    "merk": "alphard",
-    "spesifikasi": "vlie",
-    "tahun": 111,
-    "nomor_polisi": "1",
-    "harga_sewa": 1
-  },
-  {
-    "id": 23,
+    "id": 2,
     "merk": "toyota",
     "spesifikasi": "toyota rush warna putih",
-    "tahun": 2023,
+    "tahun": 2021,
     "nomor_polisi": "AG 2378 SDK",
-    "harga_sewa": 120000
-  },
-  {
-    "id": 12,
-    "merk": "Toyota",
-    "spesifikasi": "toyota rush warna merah",
-    "tahun": 2012,
-    "nomor_polisi": "B 1234 AB",
-    "harga_sewa": 230000
+    "harga_sewa": 1200000
   }
 ]
