@@ -12,15 +12,15 @@
     "nomor_telepon": "2324234"
   },
   {
-    "id": 4,
-    "nama": "ferdy",
-    "alamat": "jakarta",
-    "nomor_telepon": "37473349"
-  },
-  {
     "id": 5,
     "nama": "Ijat",
     "alamat": "Jakarta",
     "nomor_telepon": "0248303443"
+  },
+  {
+    "id": 6,
+    "nama": "Jarjit",
+    "alamat": "Jakarta",
+    "nomor_telepon": "08123456743"
   }
 ]

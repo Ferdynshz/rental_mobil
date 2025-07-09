@@ -1,6 +1,4 @@
 // models/transaksiModel.js
-
-// Data transaksi sementara (in-memory)
 let transaksiList = [];
 
 // Ambil semua transaksi

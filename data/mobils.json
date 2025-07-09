@@ -8,14 +8,6 @@
     "harga_sewa": 1300000
   },
   {
-    "id": 12,
-    "merk": "honda",
-    "spesifikasi": "honda HRV warna Khanki pearl",
-    "tahun": 2024,
-    "nomor_polisi": "S 47 U",
-    "harga_sewa": 230000
-  },
-  {
     "id": 3,
     "merk": "Toyota",
     "spesifikasi": "toyota rush warna merah",
@@ -29,6 +21,14 @@
     "spesifikasi": "sedan putih",
     "tahun": 2022,
     "nomor_polisi": "AG 0932 KL",
+    "harga_sewa": 100000
+  },
+  {
+    "id": 10,
+    "merk": "BMW",
+    "spesifikasi": "Warna biru Pajak aman",
+    "tahun": 2020,
+    "nomor_polisi": "B 2910 XL",
     "harga_sewa": 100000
   }
 ]
