@@ -20,17 +20,15 @@ exports.createForm = (req, res) => {
 
 // Simpan penyewa baru
 exports.create = async (req, res) => {
-  const { nama, alamat, nomor_telepon } = req.body;
-  if (!nama || !alamat || !nomor_telepon) {
+  const { Nama, Alamat, NomorTelepon } = req.body;
+  if (!Nama || !Alamat || !NomorTelepon) {
     return res.status(400).send('Semua data wajib diisi');
   }
 
-  const penyewas = await penyewaModel.getAllPenyewas();
   const newPenyewa = {
-    id: penyewas.length > 0 ? penyewas[penyewas.length - 1].id + 1 : 1,
-    nama: nama.trim(),
-    alamat: alamat.trim(),
-    nomor_telepon: nomor_telepon.trim()
+    Nama: Nama.trim(),
+    Alamat: Alamat.trim(),
+    NomorTelepon: NomorTelepon.trim()
   };
 
   await penyewaModel.addPenyewa(newPenyewa);
@@ -46,34 +44,23 @@ exports.editForm = async (req, res) => {
 
 // Proses update data penyewa
 exports.update = async (req, res) => {
-  const penyewas = await penyewaModel.getAllPenyewas();
-  const index = penyewas.findIndex(p => p.id === parseInt(req.params.id));
-  if (index === -1) return res.status(404).send('Penyewa tidak ditemukan');
-
-  penyewas[index] = {
-    ...penyewas[index],
-    nama: req.body.nama?.trim() || penyewas[index].nama,
-    alamat: req.body.alamat?.trim() || penyewas[index].alamat,
-    nomor_telepon: req.body.nomor_telepon?.trim() || penyewas[index].nomor_telepon,
+  const id = parseInt(req.params.id);
+  const updatedData = {
+    Nama: req.body.Nama?.trim(),
+    Alamat: req.body.Alamat?.trim(),
+    NomorTelepon: req.body.NomorTelepon?.trim()
   };
 
-  const fs = require('fs-extra');
-  const path = require('path');
-  const dataFile = path.join(__dirname, '../data/penyewas.json');
-  await fs.writeJSON(dataFile, penyewas, { spaces: 2 });
+  const updated = await penyewaModel.updatePenyewa(id, updatedData);
+  if (!updated) return res.status(404).send('Penyewa tidak ditemukan');
 
   res.redirect('/penyewa');
 };
 
 // Hapus penyewa
 exports.delete = async (req, res) => {
-  const penyewas = await penyewaModel.getAllPenyewas();
-  const filtered = penyewas.filter(p => p.id !== parseInt(req.params.id));
-
-  const fs = require('fs-extra');
-  const path = require('path');
-  const dataFile = path.join(__dirname, '../data/penyewas.json');
-  await fs.writeJSON(dataFile, filtered, { spaces: 2 });
-
+  const id = parseInt(req.params.id);
+  const deleted = await penyewaModel.deletePenyewa(id);
+  if (!deleted) return res.status(404).send('Penyewa tidak ditemukan');
   res.redirect('/penyewa');
 };
