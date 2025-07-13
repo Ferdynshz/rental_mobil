@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path'); // <= pastikan ini diimpor
+const methodOverride = require('method-override'); 
+const path = require('path');
 const app = express();
 const PORT = 3005;
 
@@ -9,10 +10,10 @@ app.set('view engine', 'ejs');
 
 // Middleware parsing form
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(methodOverride('_method')); 
 
-// Konfigurasi folder public untuk file statis
+// Folder statis
 app.use(express.static('public'));
-// Sekarang semua file di /public bisa diakses, contoh /images/bg.jpg
 
 // Import routes
 const mobilRoutes = require('./routes/mobilRoutes');
@@ -21,7 +22,7 @@ const transaksiRoutes = require('./routes/transaksiRoutes');
 
 // Route Home
 app.get('/', (req, res) => {
-    res.render('index'); // views/index.ejs
+    res.render('index');
 });
 
 // Gunakan routes

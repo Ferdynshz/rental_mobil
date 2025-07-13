@@ -1,46 +1,57 @@
-const fs = require('fs-extra');
-const path = require('path');
-const dataFile = path.join(__dirname, '../data/mobils.json');
+const axios = require("axios"); 
+const path = require("path");
 
-async function getAllMobils() {
-  const data = await fs.readJSON(dataFile);
-  return Array.isArray(data) ? data : []; // pastikan bentuknya array
-}
+const API_URL = "http://localhost:5199/api/Mobil";
 
-async function addMobil(data) {
-  const mobils = await getAllMobils();
-  mobils.push(data);
-  await fs.writeJSON(dataFile, mobils, { spaces: 2 });
-}
-
-async function findMobilById(id) {
-  const mobils = await getAllMobils();
-  return mobils.find(m => m.id === id);
-}
-
-async function updateMobil(id, newData) {
-  const mobils = await getAllMobils();
-  const index = mobils.findIndex(m => m.id === id);
-  if (index !== -1) {
-    mobils[index] = { ...mobils[index], ...newData };
-    await fs.writeJSON(dataFile, mobils, { spaces: 2 });
-    return true;
+exports.getAll = async () => {
+  try {
+    const response = await axios.get(API_URL);
+    return Array.isArray(response.data) ? response.data : []; 
+  } catch (error) {
+    console.error("Error fetching all Mobil:", error.message);
+    return [];
   }
-  return false;
-}
+};
 
-async function deleteMobil(id) {
-  const mobils = await getAllMobils();
-  const filtered = mobils.filter(m => m.id !== id);
-  if (filtered.length === mobils.length) return false;
-  await fs.writeJSON(dataFile, filtered, { spaces: 2 });
-  return true;
-}
+exports.getById = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching Mobil by ID ${id}:`, error);
+    return null;
+  }
+};
 
-module.exports = {
-  getAllMobils,
-  addMobil,
-  findMobilById,
-  updateMobil,
-  deleteMobil
+exports.add = async (newMobil) => {
+  try {
+    const response = await axios.post(API_URL, newMobil);
+    return response.data;
+  } catch (error) {
+    console.error("Error adding Mobil:", error);
+    return null;
+  }
+};
+
+exports.update = async (idMobil, updatedMobil) => {
+  try {
+    const response = await axios.put(`${API_URL}/${idMobil}`, updatedMobil);
+    console.log(response)
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+};
+
+exports.delete = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(
+      `Error deleting Mobil ID ${id}:`,
+      error.response?.data || error.message
+    );
+    return false;
+  }
 };

@@ -6,8 +6,8 @@ router.get('/', mobilController.index);
 router.get('/create', mobilController.createForm);
 router.post('/create', mobilController.create);
 router.get('/:id', mobilController.show);
-router.get('/:id/edit', mobilController.editForm);
-router.post('/:id/edit', mobilController.update);
+router.get('/:idMobil/edit', mobilController.editForm);
+router.post('/:idMobil/edit', mobilController.update);
 router.post('/:id/delete', mobilController.delete);
 
 module.exports = router;

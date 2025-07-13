@@ -1,34 +1,34 @@
 [
   {
-    "id": 2,
-    "merk": "toyota",
-    "spesifikasi": "toyota rush warna putih",
-    "tahun": 2021,
-    "nomor_polisi": "AG 2378 SDK",
-    "harga_sewa": 1300000
-  },
-  {
-    "id": 3,
-    "merk": "Toyota",
-    "spesifikasi": "toyota rush warna merah",
-    "tahun": 2023,
-    "nomor_polisi": "B 1234 ABC",
-    "harga_sewa": 123000
-  },
-  {
-    "id": 4,
-    "merk": "honda",
-    "spesifikasi": "sedan putih",
-    "tahun": 2022,
-    "nomor_polisi": "AG 0932 KL",
-    "harga_sewa": 100000
-  },
-  {
-    "id": 10,
+    "idMobil": 49,
     "merk": "BMW",
     "spesifikasi": "Warna biru Pajak aman",
     "tahun": 2020,
-    "nomor_polisi": "B 2910 XL",
-    "harga_sewa": 100000
+    "nomorPolisi": "S 4734 U",
+    "hargaSewaPerHari": 10000
+  },
+  {
+    "idMobil": 51,
+    "merk": "BMW",
+    "spesifikasi": "Warna biru Pajak aman",
+    "tahun": 2022,
+    "nomorPolisi": "S 4543 U",
+    "hargaSewaPerHari": 21222
+  },
+  {
+    "idMobil": 52,
+    "merk": "alphard",
+    "spesifikasi": "Warna biru Pajak aman",
+    "tahun": 2028,
+    "nomorPolisi": "B 2910 XL",
+    "hargaSewaPerHari": 200000
+  },
+  {
+    "id": 1234,
+    "merk": "honda",
+    "spesifikasi": "biru",
+    "tahun": 2020,
+    "nomor_polisi": "B 366F JE",
+    "harga_sewa": 1000000
   }
 ]
