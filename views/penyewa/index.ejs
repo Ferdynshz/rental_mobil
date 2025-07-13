@@ -62,18 +62,17 @@
                       >
                       <form
                         action="/penyewa/<%= p.idPenyewa %>/delete"
-                        method="post"
+                        method="POST"
                         class="d-inline"
+                        onsubmit="return confirm('Yakin hapus penyewa ini?')"
                       >
-                        <button
-                          type="submit"
-                          class="btn btn-sm btn-outline-danger"
-                        >
+                        <button type="submit" class="btn btn-sm btn-danger">
                           Hapus
                         </button>
                       </form>
                     </td>
                   </tr>
+
                   <% }) %> <% } %>
                 </tbody>
               </table>

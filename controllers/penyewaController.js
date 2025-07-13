@@ -69,6 +69,6 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   const id = parseInt(req.params.id);
   const deleted = await penyewaModel.deletePenyewa(id);
-  if (!deleted) return res.status(404).send("Penyewa tidak ditemukan");
+  // if (!deleted) return res.status(404).send("Penyewa tidak ditemukan");
   res.redirect("/penyewa");
 };

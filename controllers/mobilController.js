@@ -63,7 +63,6 @@ exports.editForm = async (req, res) => {
   res.render("mobil/edit", { mobil });
 };
 
-
 // Update mobil
 exports.update = async (req, res) => {
   const id = parseInt(req.params.idMobil);
