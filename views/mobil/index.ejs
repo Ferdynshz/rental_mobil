@@ -4,69 +4,90 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Daftar Mobil</title>
-    <!-- Bootstrap CDN -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
   </head>
-  <body class="bg-light">
-    <div class="container py-4">
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">Daftar Mobil</h1>
-        <a href="/mobil/create" class="btn btn-primary">Tambah Mobil</a>
-      </div>
-
-      <table class="table table-bordered table-striped">
-        <thead class="table-dark">
-          <tr>
-            <th>ID Mobil</th>
-            <th>Merk</th>
-            <th>spesifikasi</th>
-            <th>Tahun</th>
-            <th>Nomor Polisi</th>
-            <th>Harga Sewa Per-Hari</th>
-            <th>Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% mobils.forEach(mobil => { %>
-          <tr>
-            <td><%= mobil.idMobil %></td>
-            <td>
-              <a
-                href="/mobil/<%= mobil.idMobil %>"
-                class="text-decoration-none"
+  <body class="bg-light bg-gradient">
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="card border-start border-4 border-success shadow-lg">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-4"
               >
-                <%= mobil.merk %>
+                <h2 class="card-title text-success mb-0">Daftar Mobil</h2>
+                <a href="/mobil/create" class="btn btn-outline-success">
+                  + Tambah Mobil
+                </a>
+              </div>
+
+              <table class="table table-bordered table-striped align-middle">
+                <thead class="table-dark">
+                  <tr>
+                    <th>ID</th>
+                    <th>Merk</th>
+                    <th>Spesifikasi</th>
+                    <th>Tahun</th>
+                    <th>Nomor Polisi</th>
+                    <th>Harga / Hari</th>
+                    <th class="text-center">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if (mobils.length === 0) { %>
+                  <tr>
+                    <td colspan="7" class="text-center text-muted">
+                      Belum ada data mobil.
+                    </td>
+                  </tr>
+                  <% } else { %> 
+                  <% mobils.forEach(m => { %>
+                  <tr>
+                    <td><%= m.idMobil %></td>
+                    <td>
+                      <a
+                        href="/mobil/<%= m.idMobil %>"
+                        class="text-decoration-none"
+                        ><%= m.merk %></a
+                      >
+                    </td>
+                    <td><%= m.spesifikasi %></td>
+                    <td><%= m.tahun %></td>
+                    <td><%= m.nomorPolisi %></td>
+                    <td>Rp <%= m.hargaSewaPerHari.toLocaleString("id-ID") %></td>
+                    <td class="text-center">
+                      <a
+                        href="/mobil/<%= m.idMobil %>/edit"
+                        class="btn btn-sm btn-outline-warning me-1"
+                        >Edit</a
+                      >
+                      <form
+                        action="/mobil/<%= m.idMobil %>/delete"
+                        method="POST"
+                        class="d-inline"
+                        onsubmit="return confirm('Yakin hapus mobil ini?')"
+                      >
+                        <button type="submit" class="btn btn-sm btn-danger">
+                          Hapus
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                  <% }) %> 
+                  <% } %>
+                </tbody>
+              </table>
+
+              <a href="/" class="btn btn-secondary mt-3">
+                &larr; Kembali ke Beranda
               </a>
-            </td>
-            <td><%= mobil.spesifikasi %></td>
-            <td><%= mobil.tahun %></td>
-            <td><%= mobil.nomorPolisi %></td>
-            <td>Rp <%= mobil.hargaSewaPerHari.toLocaleString('id-ID') %></td>
-            <td>
-              <a
-                href="/mobil/<%= mobil.idMobil %>/edit"
-                class="btn btn-sm btn-warning"
-                >Edit</a
-              >
-              <form
-                action="/mobil/<%= mobil.idMobil %>/delete"
-                method="post"
-                class="d-inline"
-              >
-                <button type="submit" class="btn btn-sm btn-danger">
-                  Hapus
-                </button>
-              </form>
-            </td>
-          </tr>
-          <% }) %>
-        </tbody>
-      </table>
-
-      <a href="/" class="btn btn-secondary">Kembali ke Beranda</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,14 +1,58 @@
-<div class="container mt-4">
-  <h1 class="mb-4">Detail Mobil</h1>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title"><%= mobil.merk %></h5>
-      <p class="card-text"><strong>Spesifikasi:</strong> <%= mobil.spesifikasi %></p>
-      <p class="card-text"><strong>Tahun:</strong> <%= mobil.tahun %></p>
-      <p class="card-text"><strong>Nomor Polisi:</strong> <%= mobil.nomor_polisi %></p>
-      <p class="card-text"><strong>Harga Sewa per Hari:</strong> 
-        Rp <%= mobil.harga_sewa %></p>
-      <a href="/mobil" class="btn btn-secondary mt-3">Kembali</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detail Mobil</title>
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light bg-gradient">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card border-start border-4 border-primary shadow-lg">
+          <div class="card-body">
+            <h2 class="card-title text-primary mb-4">Detail Mobil</h2>
+            <ul class="list-group list-group-flush mb-4">
+              <li class="list-group-item">
+                <strong>ID Mobil:</strong><br>
+                <%= mobil.idMobil %>
+              </li>
+              <li class="list-group-item">
+                <strong>Merk:</strong><br>
+                <%= mobil.merk %>
+              </li>
+              <li class="list-group-item">
+                <strong>Spesifikasi:</strong><br>
+                <%= mobil.spesifikasi %>
+              </li>
+              <li class="list-group-item">
+                <strong>Tahun:</strong><br>
+                <%= mobil.tahun %>
+              </li>
+              <li class="list-group-item">
+                <strong>Nomor Polisi:</strong><br>
+                <%= mobil.nomorPolisi %>
+              </li>
+              <li class="list-group-item">
+                <strong>Harga Sewa / Hari:</strong><br>
+                Rp <%= mobil.hargaSewaPerHari.toLocaleString("id-ID") %>
+              </li>
+            </ul>
+            <div class="d-flex justify-content-between">
+              <a href="/mobil/<%= mobil.idMobil %>/edit" class="btn btn-outline-warning">Edit</a>
+              <form action="/mobil/<%= mobil.idMobil %>/delete" method="post" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus mobil ini?')">
+                <button type="submit" class="btn btn-outline-danger">Hapus</button>
+              </form>
+              <a href="/mobil" class="btn btn-secondary">Kembali</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
