@@ -5,13 +5,14 @@ const API_URL = "http://localhost:5199/api/Penyewa";
 // Ambil semua penyewa
 exports.getAllPenyewas = async () => {
   try {
-    const response = await axios.get(API_URL);
+    const response = await axios.get(API_URL); 
     return Array.isArray(response.data) ? response.data : [];
   } catch (error) {
     console.error("Error fetching all Penyewa:", error.message);
     return [];
   }
 };
+
 
 // Tambah penyewa baru
 exports.addPenyewa = async (data) => {

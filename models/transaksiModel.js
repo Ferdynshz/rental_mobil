@@ -8,7 +8,7 @@ exports.getAllTransaksi = async () => {
     const response = await axios.get(API_URL);
     return Array.isArray(response.data) ? response.data : [];
   } catch (error) {
-    console.error("Error fetching all Transaksi:", error.message);
+    console.error("Error fetching transaksi:", error.message);
     return [];
   }
 };
@@ -19,33 +19,19 @@ exports.addTransaksi = async (data) => {
     const response = await axios.post(API_URL, data);
     return response.data;
   } catch (error) {
-    console.error("Error adding Transaksi:", error.message);
+    console.error("Error adding transaksi:", error.message);
     return null;
   }
 };
 
-// Cari transaksi berdasarkan ID
+
+// Ambil transaksi berdasarkan ID
 exports.findTransaksiById = async (id) => {
   try {
     const response = await axios.get(`${API_URL}/${id}`);
-    const data = response.data;
-
-    console.log("Data transaksi dari API:", data);
-
-    return {
-      id_transaksi: data.idTransaksi,
-      Nama: data.nama,
-      Alamat: data.alamat,
-      NomorTelepon: data.nomorTelepon,
-    };
+    return response.data;
   } catch (error) {
-    if (error.response?.status === 404) {
-      console.warn(`Transaksi dengan ID ${id} tidak ditemukan.`);
-      return null;
-    } else {
-      console.error("Error saat mengambil transaksi:", error.message);
-      throw error;
-    }
+    console.error("Error fetching transaksi by ID:", error.message);
+    return null;
   }
 };
-

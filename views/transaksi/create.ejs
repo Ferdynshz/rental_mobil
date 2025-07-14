@@ -1,52 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tambah Transaksi</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-  <div class="container py-4">
-    <h2 class="mb-4">Form Tambah Transaksi</h2>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tambah Transaksi</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-light">
+    <div class="container py-4">
+      <h2 class="mb-4">Form Tambah Transaksi</h2>
 
-    <form action="/transaksi/create" method="POST">
-      <!-- Dropdown Mobil (berdasarkan nama/merk) -->
-      <div class="mb-3">
-        <label for="id_mobil" class="form-label">Pilih Mobil</label>
-        <select name="id_mobil" id="id_mobil" class="form-select" required>
-          <% daftarMobil.forEach(mobil => { %>
-            <option value="<%= mobil.id_mobil %>"><%= mobil.merk %></option>
-          <% }) %>
-        </select>
-      </div>
+      <form action="/transaksi/create" method="POST">
+        <!-- Dropdown Mobil -->
+        <div class="mb-3">
+          <label for="idMobil" class="form-label">Pilih Mobil</label>
+          <select name="idMobil" id="idMobil" class="form-select" required>
+            <option value="">-- Pilih Mobil --</option>
+            <% daftarMobil.forEach(mobil => { %>
+            <option value="<%= mobil.idMobil %>"><%= mobil.merk %></option>
+            <% }) %>
+          </select>
+        </div>
 
-      <!-- Input ID Penyewa -->
-      <div class="mb-3">
-        <label for="id_penyewa" class="form-label">ID Penyewa</label>
-        <input type="number" name="id_penyewa" id="id_penyewa" class="form-control" required />
-      </div>
+        <!-- Dropdown Penyewa -->
+        <div class="mb-3">
+          <label for="idPenyewa" class="form-label">Pilih Penyewa</label>
+          <select name="idPenyewa" id="idPenyewa" class="form-select" required>
+            <option value="">-- Pilih Penyewa --</option>
+            <% daftarPenyewa.forEach(penyewa => { %>
+            <option value="<%= penyewa.idPenyewa %>">
+              <%= penyewa.nama %>
+            </option>
+            <% }) %>
+          </select>
+        </div>
 
-      <!-- Input Tanggal Kembali -->
-      <div class="mb-3">
-        <label for="tanggal_kembali" class="form-label">Tanggal Kembali</label>
-        <input type="date" name="tanggal_kembali" id="tanggal_kembali" class="form-control" required />
-      </div>
+        <!-- Input Tanggal Kembali -->
+        <div class="mb-3">
+          <label for="tanggal_sewa" class="form-label"
+            >Tanggal Sewa</label
+          >
+          <input
+            type="date"
+            name="tanggal_sewa"
+            id="tanggal_sewa"
+            class="form-control"
+            required
+          />
+        </div>
+        <!-- Input Tanggal Kembali -->
+        <div class="mb-3">
+          <label for="tanggal_kembali" class="form-label"
+            >Tanggal Kembali</label
+          >
+          <input
+            type="date"
+            name="tanggal_kembali"
+            id="tanggal_kembali"
+            class="form-control"
+            required
+          />
+        </div>
 
-      <!-- Input Lama Sewa -->
-      <div class="mb-3">
-        <label for="lama_sewa" class="form-label">Lama Sewa (hari)</label>
-        <input type="number" name="lama_sewa" id="lama_sewa" class="form-control" required />
-      </div>
+        <!-- Input Lama Sewa -->
+        <div class="mb-3">
+          <label for="lama_sewa" class="form-label">Lama Sewa (hari)</label>
+          <input
+            type="number"
+            name="lama_sewa"
+            id="lama_sewa"
+            class="form-control"
+            required
+          />
+        </div>
 
-      <!-- Input Total Biaya -->
-      <div class="mb-3">
-        <label for="total_biaya" class="form-label">Total Biaya</label>
-        <input type="number" name="total_biaya" id="total_biaya" class="form-control" required />
-      </div>
+        <!-- Input Total Biaya -->
+        <div class="mb-3">
+          <label for="total_biaya" class="form-label">Total Biaya</label>
+          <input
+            type="number"
+            name="total_biaya"
+            id="total_biaya"
+            class="form-control"
+            required
+          />
+        </div>
 
-      <button type="submit" class="btn btn-primary">Simpan</button>
-    </form>
-  </div>
-</body>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+      </form>
+    </div>
+  </body>
 </html>

@@ -5,13 +5,14 @@ const API_URL = "http://localhost:5199/api/Mobil";
 
 exports.getAll = async () => {
   try {
-    const response = await axios.get(API_URL);
-    return Array.isArray(response.data) ? response.data : []; 
+    const response = await axios.get(API_URL); 
+    return Array.isArray(response.data) ? response.data : [];
   } catch (error) {
     console.error("Error fetching all Mobil:", error.message);
     return [];
   }
 };
+
 
 exports.getById = async (id) => {
   try {
