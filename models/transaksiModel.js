@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const API_URL = "http://localhost:5199/api/Penyewa";
+const API_URL = "http://localhost:5199/api/Transaction";
 
 // Ambil semua transaksi
 exports.getAllTransaksi = async () => {
@@ -33,7 +33,7 @@ exports.findTransaksiById = async (id) => {
     console.log("Data transaksi dari API:", data);
 
     return {
-      IdTransaksi: data.idTransaksi,
+      id_transaksi: data.idTransaksi,
       Nama: data.nama,
       Alamat: data.alamat,
       NomorTelepon: data.nomorTelepon,
@@ -49,28 +49,3 @@ exports.findTransaksiById = async (id) => {
   }
 };
 
-// Update transaksi
-exports.updateTransaksi = async (id, updatedData) => {
-  try {
-    const response = axios.put(`${API_URL}/${id}`, updatedData);
-    console.log("Response", response);
-    return response.data;
-  } catch (error) {
-    console.error(`Error updating transaksi ID ${id}:`, error.message);
-    return null;
-  }
-};
-
-// Hapus transaksi
-exports.deleteTransaksi = async (id) => {
-  try {
-    const response = await axios.delete(`${API_URL}/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error(
-      `Error deleting transaksi ID ${id}:`,
-      error.response?.data || error.message
-    );
-    return false;
-  }
-};
