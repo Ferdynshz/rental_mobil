@@ -1,33 +1,76 @@
-// models/transaksiModel.js
-let transaksiList = [];
+const axios = require("axios");
+
+const API_URL = "http://localhost:5199/api/Penyewa";
 
 // Ambil semua transaksi
-function getAllTransaksis() {
-  return transaksiList;
-}
+exports.getAllTransaksi = async () => {
+  try {
+    const response = await axios.get(API_URL);
+    return Array.isArray(response.data) ? response.data : [];
+  } catch (error) {
+    console.error("Error fetching all Transaksi:", error.message);
+    return [];
+  }
+};
 
 // Tambah transaksi baru
-function addTransaksi(data) {
-  const newId = transaksiList.length > 0 ? transaksiList[transaksiList.length - 1].id + 1 : 1;
-  const newTransaksi = { id: newId, ...data };
-  transaksiList.push(newTransaksi);
-}
+exports.addTransaksi = async (data) => {
+  try {
+    const response = await axios.post(API_URL, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error adding Transaksi:", error.message);
+    return null;
+  }
+};
 
-// Gabungkan data transaksi dengan nama penyewa dan merk mobil
-function getDetailTransaksi(mobils, penyewas) {
-  return transaksiList.map(t => {
-    const mobil = mobils.find(m => m.id === t.mobilId);
-    const penyewa = penyewas.find(p => p.id === t.penyewaId);
+// Cari transaksi berdasarkan ID
+exports.findTransaksiById = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/${id}`);
+    const data = response.data;
+
+    console.log("Data transaksi dari API:", data);
+
     return {
-      ...t,
-      mobilMerk: mobil?.merk || 'Tidak ditemukan',
-      penyewaNama: penyewa?.nama || 'Tidak ditemukan'
+      IdTransaksi: data.idTransaksi,
+      Nama: data.nama,
+      Alamat: data.alamat,
+      NomorTelepon: data.nomorTelepon,
     };
-  });
-}
+  } catch (error) {
+    if (error.response?.status === 404) {
+      console.warn(`Transaksi dengan ID ${id} tidak ditemukan.`);
+      return null;
+    } else {
+      console.error("Error saat mengambil transaksi:", error.message);
+      throw error;
+    }
+  }
+};
 
-module.exports = {
-  getAllTransaksis,
-  addTransaksi,
-  getDetailTransaksi
+// Update transaksi
+exports.updateTransaksi = async (id, updatedData) => {
+  try {
+    const response = axios.put(`${API_URL}/${id}`, updatedData);
+    console.log("Response", response);
+    return response.data;
+  } catch (error) {
+    console.error(`Error updating transaksi ID ${id}:`, error.message);
+    return null;
+  }
+};
+
+// Hapus transaksi
+exports.deleteTransaksi = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(
+      `Error deleting transaksi ID ${id}:`,
+      error.response?.data || error.message
+    );
+    return false;
+  }
 };
